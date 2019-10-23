@@ -6,8 +6,4 @@ public class Transaction {
     String to;
     String narrative;
     Double amount;
-
-    public Transaction (String transactionString) {
-
-    }
 }
