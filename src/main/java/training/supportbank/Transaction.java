@@ -1,5 +1,8 @@
 package training.supportbank;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class Transaction {
     String date;
     String from;
@@ -7,13 +10,19 @@ public class Transaction {
     String narrative;
     Double amount;
 
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
+
     public Transaction (String singleTrans) {
         String[] parts = singleTrans.split(",");
-        date = parts[0];
-        from = parts[1];
-        to = parts[2];
-        narrative = parts[3];
-        amount = Double.valueOf(parts[4]);
+        try {
+            date = parts[0];
+            from = parts[1];
+            to = parts[2];
+            narrative = parts[3];
+            amount = Double.valueOf(parts[4]);
+        } catch (Exception e) {
+            LOGGER.error("data doesn't fit Transaction class " + e);
+        }
     }
 
     @Override

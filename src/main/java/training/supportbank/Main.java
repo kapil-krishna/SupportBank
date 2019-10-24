@@ -1,12 +1,15 @@
 package training.supportbank;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.sql.SQLOutput;
 import java.util.*;
 import java.nio.file.*;
 
 public class Main {
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
+
     //create method for List [Account]
     private static void listTransactions(Map<String, Account> someMap) {
         Scanner askName = new Scanner(System.in);
@@ -35,8 +38,10 @@ public class Main {
     public static void main(String args[]) throws IOException {
 
         //read the file and contain it as a list of strings
-        Path filePath = Paths.get("resources/Transactions2014.csv");
-        List<String> lines = Files.readAllLines(filePath);
+        Path filePath1 = Paths.get("resources/Transactions2014.csv");
+        List<String> lines = Files.readAllLines(filePath1);
+        Path filePath2 = Paths.get("resources/DodgyTransactions2015.csv");
+        lines.addAll(Files.readAllLines(filePath2));
 
         //create a new list called "transactions"
         List<Transaction> allTransactions = new ArrayList<>();
@@ -46,8 +51,9 @@ public class Main {
             //create array that splits the string into it's individual parts
             //create an empty object of transaction class
             Transaction t = new Transaction(line);
-            //push the object into the "transactions" list
             allTransactions.add(t);
+            //push the object into the "transactions" list
+
         }
         //now "allTransactions" is a list of Transaction objects!
 
@@ -68,6 +74,7 @@ public class Main {
             balanceList.put(name, listOfAcc.get(name).getBalance());
         }
 
+
         //main code starts here
         Scanner intro = new Scanner(System.in);
         System.out.println(
@@ -76,12 +83,13 @@ public class Main {
         String userOption = intro.nextLine();
         while (!(userOption.equals("List All") || userOption.equals("List [Account]"))) {
             Scanner repeat = new Scanner(System.in);
-            System.out.println("That is not one of the commands I know. Please Type List All or List [Account]");
+            System.out.println("That is not one of the commands I know. Please Type List All or List [Account].");
             userOption = repeat.nextLine();
         }
         options(userOption, balanceList, listOfAcc);
     }
 }
+
 
 
 
