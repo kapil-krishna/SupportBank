@@ -18,7 +18,7 @@ public class Transaction {
 
     @Override
     public String toString () {
-        String stupid = date + " " + from + " " + to + " " + narrative + " " + amount + "\n";
+        String stupid = "\n" + date + " " + from + " " + to + " " + narrative + " " + amount;
         return stupid;
     }
 

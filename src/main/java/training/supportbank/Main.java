@@ -24,10 +24,8 @@ public class Main {
             //push the object into the "transactions" list
             allTransactions.add(t);
         }
-        //now "allTransactions" is a list of Transaction objects
+        //now "allTransactions" is a list of Transaction objects!
 
-
-        //CALCULATE THE SUM OF MONEY OWED
         //get a list of names
         List<String> names = new ArrayList<>();
         for (int i = 0; i < allTransactions.size(); i++) {
@@ -35,24 +33,8 @@ public class Main {
                 names.add(allTransactions.get(i).from);
             }
         }
-//        System.out.println(names);
-//        //get a list of amounts owed
-//        List<Double> amountOwed = new ArrayList<>();
-//        for (int i = 0; i < names.size(); i++) {
-//            Double owed = 0.0;
-//            for (int j = 0; j < allTransactions.size(); j++) {
-//                if (allTransactions.get(j).from.equals(names.get(i))) {
-//                    owed += (allTransactions.get(j).amount);
-//                }
-//                if (allTransactions.get(j).to.equals(names.get(i))) {
-//                    owed -= allTransactions.get(j).amount;
-//                }
-//            }
-//            amountOwed.add(owed);
-//        }
-//        System.out.println(amountOwed);
-//        //print list
-
+        //create two empty hashmaps, one with a list of accounts with transactions
+        //and one with a list of accounts with balances
         Map<String, Account> listOfAcc = new HashMap<String, Account>();
         Map<String, Double> balanceList = new HashMap<String, Double>();
         for (String name : names) {
@@ -61,18 +43,42 @@ public class Main {
             balanceList.put(name, listOfAcc.get(name).getBalance());
         }
 
-//        public static void listTrasactions() {
-        Scanner askName = new Scanner(System.in);
-        String accountName;
-        System.out.println("Enter account name");
-        accountName = askName.nextLine();
-        System.out.println((listOfAcc.get(accountName)).getFromTransactions());
-        System.out.println((listOfAcc.get(accountName)).getToTransactions());
+        //create a method for List [Account]
+        //static void listTransactions() {
+            Scanner askName = new Scanner(System.in);
+            String accountName;
+            System.out.println("Enter an account name");
+            accountName = askName.nextLine();
+            System.out.println((listOfAcc.get(accountName)).getFromTransactions());
+            System.out.println((listOfAcc.get(accountName)).getToTransactions());
+        //}
 
+        //create a method for List All
+        //static void balanceOwed() {
+            System.out.println(balanceList);
+        //}
+
+//        Scanner intro = new Scanner(System.in);
+//        System.out.println(
+//                "Welcome to the bank of Softwire! Type List All to find out how much everyone owes. " +
+//                        "Type List [Account] to get all the transactions for a particular person.")
+//        String userOption = intro.nextLine();
+//        options(userOption);
+//
+//        //create method for asking options
+//        public static void options (userOption) {
+//        if (userOption == "List All") {
+//            balanceOwed();
 //        }
-//        public static void balanceOwed() {
-        System.out.println(balanceList);
+//        if (userOption == "List [Account]") {
+//            listTransactions();
+//        } else {
+//            Scanner repeat = new Scanner(System.in);
+//            System.out.println("That is not one of the commands I know. Please Type List All or List [Account]");
+//            userOption = repeat.nextLine();
+//        }
     }
 }
-//
+
+
 
