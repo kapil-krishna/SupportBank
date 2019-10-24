@@ -7,6 +7,31 @@ import java.util.*;
 import java.nio.file.*;
 
 public class Main {
+    //create method for List [Account]
+    private static void listTransactions(Map<String, Account> someMap) {
+        Scanner askName = new Scanner(System.in);
+        String accountName;
+        System.out.println("Enter an account name");
+        accountName = askName.nextLine();
+        System.out.println((someMap.get(accountName)).getFromTransactions());
+        System.out.println((someMap.get(accountName)).getToTransactions());
+    }
+
+    //create method for List All
+    private static void balanceOwed(Map<String, Double> someMap) {
+        System.out.println(someMap);
+    }
+
+    private static void options(String someString, Map<String, Double> someMap, Map<String, Account> anotherMap) {
+        if (someString.equals("List All")) {
+            balanceOwed(someMap);
+        }
+        if (someString.equals("List [Account]")) {
+            listTransactions(anotherMap);
+        }
+    }
+
+    //MAIN
     public static void main(String args[]) throws IOException {
 
         //read the file and contain it as a list of strings
@@ -43,40 +68,18 @@ public class Main {
             balanceList.put(name, listOfAcc.get(name).getBalance());
         }
 
-        //create a method for List [Account]
-        //static void listTransactions() {
-            Scanner askName = new Scanner(System.in);
-            String accountName;
-            System.out.println("Enter an account name");
-            accountName = askName.nextLine();
-            System.out.println((listOfAcc.get(accountName)).getFromTransactions());
-            System.out.println((listOfAcc.get(accountName)).getToTransactions());
-        //}
-
-        //create a method for List All
-        //static void balanceOwed() {
-            System.out.println(balanceList);
-        //}
-
-//        Scanner intro = new Scanner(System.in);
-//        System.out.println(
-//                "Welcome to the bank of Softwire! Type List All to find out how much everyone owes. " +
-//                        "Type List [Account] to get all the transactions for a particular person.")
-//        String userOption = intro.nextLine();
-//        options(userOption);
-//
-//        //create method for asking options
-//        public static void options (userOption) {
-//        if (userOption == "List All") {
-//            balanceOwed();
-//        }
-//        if (userOption == "List [Account]") {
-//            listTransactions();
-//        } else {
-//            Scanner repeat = new Scanner(System.in);
-//            System.out.println("That is not one of the commands I know. Please Type List All or List [Account]");
-//            userOption = repeat.nextLine();
-//        }
+        //main code starts here
+        Scanner intro = new Scanner(System.in);
+        System.out.println(
+                "Welcome to the bank of Softwire! Type List All to find out how much everyone owes. " +
+                        "Type List [Account] to get all the transactions for a particular person.");
+        String userOption = intro.nextLine();
+        while (!(userOption.equals("List All") || userOption.equals("List [Account]"))) {
+            Scanner repeat = new Scanner(System.in);
+            System.out.println("That is not one of the commands I know. Please Type List All or List [Account]");
+            userOption = repeat.nextLine();
+        }
+        options(userOption, balanceList, listOfAcc);
     }
 }
 
