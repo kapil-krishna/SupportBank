@@ -1,22 +1,30 @@
 package training.supportbank;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
     List<Transaction> fromTransactions = new ArrayList<>();
     List<Transaction> toTransactions = new ArrayList<>();
     Double balance = 0.0;
 
     public Account(String blah, List<Transaction> allTransactions) {
         for (Transaction item : allTransactions) {
-            if (blah.equals(item.getFrom())) {
-                fromTransactions.add(item);
-                balance += item.getAmount();
-            }
-            if (blah.equals(item.getTo())) {
-                toTransactions.add(item);
-                balance -= item.getAmount();
+            try {
+                if (blah.equals(item.getFrom())) {
+                    fromTransactions.add(item);
+                    balance += item.getAmount();
+                }
+                if (blah.equals(item.getTo())) {
+                    toTransactions.add(item);
+                    balance -= item.getAmount();
+                }
+            } catch (Exception e) {
+                LOGGER.error("Could not add transaction to list and/or calculate balance - check data " + e);
             }
         }
     }

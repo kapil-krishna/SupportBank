@@ -21,7 +21,7 @@ public class Transaction {
             narrative = parts[3];
             amount = Double.valueOf(parts[4]);
         } catch (Exception e) {
-            LOGGER.error("data doesn't fit Transaction class " + e);
+            LOGGER.error("data doesn't fit Transaction class when creating objects, ref:" + singleTrans + " " + e);
         }
     }
 

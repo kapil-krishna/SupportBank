@@ -37,24 +37,28 @@ public class Main {
     //MAIN
     public static void main(String args[]) throws IOException {
 
+        LOGGER.info("Beginning of main code");
+
         //read the file and contain it as a list of strings
         Path filePath1 = Paths.get("resources/Transactions2014.csv");
         List<String> lines = Files.readAllLines(filePath1);
         Path filePath2 = Paths.get("resources/DodgyTransactions2015.csv");
         lines.addAll(Files.readAllLines(filePath2));
+        LOGGER.info("File read successfully");
 
-        //create a new list called "transactions"
+        //create a new list called "allTransactions"
         List<Transaction> allTransactions = new ArrayList<>();
 
         //for loop to iterate on each line of transactions
         for (String line : lines) {
-            //create array that splits the string into it's individual parts
-            //create an empty object of transaction class
-            Transaction t = new Transaction(line);
-            allTransactions.add(t);
-            //push the object into the "transactions" list
+                //create array that splits the string into it's individual parts
+                //create an empty object of transaction class
+                Transaction t = new Transaction(line);
+                //push the object into the "transactions" list
+                allTransactions.add(t);
+            }
+        LOGGER.info("Created list of transaction objects");
 
-        }
         //now "allTransactions" is a list of Transaction objects!
 
         //get a list of names
@@ -64,6 +68,8 @@ public class Main {
                 names.add(allTransactions.get(i).from);
             }
         }
+        LOGGER.info("Created list of names");
+
         //create two empty hashmaps, one with a list of accounts with transactions
         //and one with a list of accounts with balances
         Map<String, Account> listOfAcc = new HashMap<String, Account>();
@@ -73,9 +79,12 @@ public class Main {
             listOfAcc.put(name, holder);
             balanceList.put(name, listOfAcc.get(name).getBalance());
         }
+        LOGGER.info("Hashmaps created successfully");
 
+        LOGGER.info("End of main code");
 
-        //main code starts here
+        //program starts here
+        LOGGER.info("Beginning of program");
         Scanner intro = new Scanner(System.in);
         System.out.println(
                 "Welcome to the bank of Softwire! Type List All to find out how much everyone owes. " +
@@ -87,6 +96,8 @@ public class Main {
             userOption = repeat.nextLine();
         }
         options(userOption, balanceList, listOfAcc);
+
+        LOGGER.info("End of program");
     }
 }
 
