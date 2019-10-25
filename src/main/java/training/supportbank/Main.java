@@ -51,12 +51,17 @@ public class Main {
 
         //for loop to iterate on each line of transactions
         for (String line : lines) {
-                //create array that splits the string into it's individual parts
+            int lineNum = lines.indexOf(line);
                 //create an empty object of transaction class
+            try {
                 Transaction t = new Transaction(line);
                 //push the object into the "transactions" list
                 allTransactions.add(t);
+            } catch (Exception e) {
+                LOGGER.error(String.format("Failed to create transaction object from string %s on line number %d. Error was %s", line, lineNum, e));
+                continue;
             }
+        }
         LOGGER.info("Created list of transaction objects");
 
         //now "allTransactions" is a list of Transaction objects!

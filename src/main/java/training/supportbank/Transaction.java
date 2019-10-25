@@ -14,14 +14,16 @@ public class Transaction {
 
     public Transaction (String singleTrans) {
         String[] parts = singleTrans.split(",");
+        date = parts[0];
+        from = parts[1];
+        to = parts[2];
+        narrative = parts[3];
         try {
-            date = parts[0];
-            from = parts[1];
-            to = parts[2];
-            narrative = parts[3];
             amount = Double.valueOf(parts[4]);
-        } catch (Exception e) {
-            LOGGER.error("data doesn't fit Transaction class when creating objects, ref:" + singleTrans + " " + e);
+        }
+        catch (NumberFormatException e) {
+            LOGGER.error(String.format("Failed to convert amount %s to a double", parts[4]));
+            throw e;
         }
     }
 

@@ -24,7 +24,8 @@ public class Account {
                     balance -= item.getAmount();
                 }
             } catch (Exception e) {
-                LOGGER.error("Could not add transaction to list and/or calculate balance - check data " + e);
+                LOGGER.error("Could not add/subtract " + item.getAmount() + " to balance" + e);
+                throw e;
             }
         }
     }
